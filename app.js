@@ -120,9 +120,26 @@ function updatePrice() {
   finalCents = totalPriceInCents % 100;
 }
 
+// WhatsApp integeration
+var whatsappLink = 
+  "https://api.whatsapp.com/send?phone=919000000000&text=Order%20detailshttps://api.whatsapp.com/send?phone=919000000000&text=Order%20details"
+
+// WhatsApp integeration
+function updateWhatsappLink() {
+  for (let index = 0; index < items.length; index++) {
+    if (items[index].quantity != 0){
+      whatsappLink += "%0A" + items[index].name + "%20" + items[index].quantity;
+    }
+  }
+  whatsappLink +=
+    "%0A" + "Total%20Price:%20$" + finalDollars + "%20" + finalCents + "c";
+}
 
 cartButton.onclick = () => {
   updatePrice();
+  // // WhatsApp Integeration
+  updateWhatsappLink();
+  window.open(whatsappLink, "_blank");
 
 
   for (let index = 0; index < items.length; index++) {
